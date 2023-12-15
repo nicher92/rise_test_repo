@@ -1,0 +1,4 @@
+datasets==2.15.0
+ray==2.8.1
+torch==2.1.2
+transformers==4.36.1
