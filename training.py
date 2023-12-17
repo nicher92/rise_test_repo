@@ -68,14 +68,14 @@ def eval_epoch(eval_loader, model):
     return avg_eval_loss
 
 
-def save_model(model, tokenizer, system):
+def save_model(model, system):
     output_dir = f"./model_{system}"
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
+    # I currently only save the model - not the tokenizer - which is the same as previously
     model.save_pretrained(output_dir)
-    tokenizer.save_pretrained(output_dir)
 
 
 def train_model(params, model, training_dataset, evaluation_dataset, hyperparameter_search=True, system="A"):
@@ -106,7 +106,7 @@ def train_model(params, model, training_dataset, evaluation_dataset, hyperparame
     if hyperparameter_search:
         return t_loss, e_loss
     else:
-        save_model(model, tokenizer, system)
+        save_model(model, system)
         return model, t_loss, e_loss
 
 
@@ -127,7 +127,6 @@ def hyperparameter_combinations():
     learning_rates = [2e-5, 3e-5, 5e-5]
     batch_sizes = [16, 32]
     warmup_steps = [0, 0.1]
-
 
     hyperparameter_configs = []
     for lr in learning_rates:
@@ -175,5 +174,12 @@ def init_model(model_name, tokenizer, training_dataset):
                                                    ignore_mismatched_sizes=True).to(device)
 
     
+    return model
+
+
+
+def init_pretrained_model(model_path):
+    device = device_check()
+    model = BertForTokenClassification.from_pretrained(model_path).to(device)
     return model
 

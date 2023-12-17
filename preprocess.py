@@ -3,13 +3,10 @@ import torch
 from torch.utils.data import TensorDataset
 
 
-VALID_LABELS = [1, 2, 3, 4, 5, 6, 7, 8, 13, 14]
-LABEL_MAPPING = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 13: 9, 14: 10}
-INVERSE_LABEL_MAPPING = {v: k for k, v in LABEL_MAPPING.items()}
-
 
 def ret_mapping():
     # Mapping from integer labels to strings (from HF dataset repo) and vice versa
+    # Also label mappings and reversed label mappings for system B to align tokens
     stoi = {
         "O": 0,
         "B-PER": 1,
@@ -45,7 +42,12 @@ def ret_mapping():
     }
 
     itos = {value: key for key, value in stoi.items()}
-    return stoi, itos
+
+    LABEL_MAPPING = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 13: 9, 14: 10}
+    
+    INVERSE_LABEL_MAPPING = {v: k for k, v in LABEL_MAPPING.items()}
+
+    return stoi, itos, LABEL_MAPPING, INVERSE_LABEL_MAPPING
 
 
 def load_and_clean_dataset(dataset_name):
@@ -92,6 +94,8 @@ def to_tensor_dataset(data, labels):
 
 
 def label_fix(labels):
+
+    stoi, itos, LABEL_MAPPING, INVERSE_LABEL_MAPPING = ret_mapping()
     # Input is a nested list of labels, if the label isnt in LABEL_MAPPING it is set to 0, else it gets the LABEL_MAPING value
     return  [[LABEL_MAPPING.get(x, 0) for x in sublist] for sublist in labels]
 

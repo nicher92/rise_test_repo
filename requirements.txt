@@ -1,5 +1,5 @@
-datasets==2.15.0
-evaluate==0.4.1
-ray==2.8.1
-torch==2.1.2
-transformers==4.36.1
+datasets==2.10.1
+evaluate==0.4.0
+pandas==1.5.3
+torch==2.1.0+cu121
+transformers==4.34.1
