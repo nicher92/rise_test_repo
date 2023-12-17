@@ -4,6 +4,48 @@ from torch.utils.data import TensorDataset
 
 
 VALID_LABELS = [1, 2, 3, 4, 5, 6, 7, 8, 13, 14]
+LABEL_MAPPING = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 13: 9, 14: 10}
+INVERSE_LABEL_MAPPING = {v: k for k, v in LABEL_MAPPING.items()}
+
+
+def ret_mapping():
+    # Mapping from integer labels to strings (from HF dataset repo) and vice versa
+    stoi = {
+        "O": 0,
+        "B-PER": 1,
+        "I-PER": 2,
+        "B-ORG": 3,
+        "I-ORG": 4,
+        "B-LOC": 5,
+        "I-LOC": 6,
+        "B-ANIM": 7,
+        "I-ANIM": 8,
+        "B-BIO": 9,
+        "I-BIO": 10,
+        "B-CEL": 11,
+        "I-CEL": 12,
+        "B-DIS": 13,
+        "I-DIS": 14,
+        "B-EVE": 15,
+        "I-EVE": 16,
+        "B-FOOD": 17,
+        "I-FOOD": 18,
+        "B-INST": 19,
+        "I-INST": 20,
+        "B-MEDIA": 21,
+        "I-MEDIA": 22,
+        "B-MYTH": 23,
+        "I-MYTH": 24,
+        "B-PLANT": 25,
+        "I-PLANT": 26,
+        "B-TIME": 27,
+        "I-TIME": 28,
+        "B-VEHI": 29,
+        "I-VEHI": 30,
+    }
+
+    itos = {value: key for key, value in stoi.items()}
+    return stoi, itos
 
 
 def load_and_clean_dataset(dataset_name):
@@ -50,8 +92,8 @@ def to_tensor_dataset(data, labels):
 
 
 def label_fix(labels):
-    # Input is a nested list of labels
-    return [[x if x in VALID_LABELS else 0 for x in sublist] for sublist in labels]
+    # Input is a nested list of labels, if the label isnt in LABEL_MAPPING it is set to 0, else it gets the LABEL_MAPING value
+    return  [[LABEL_MAPPING.get(x, 0) for x in sublist] for sublist in labels]
 
 
 def prepare_data(dataset, tokenizer, splitname, system, max_length=70):
@@ -96,42 +138,3 @@ def prepare_data(dataset, tokenizer, splitname, system, max_length=70):
 
     return dataset
 
-
-def ret_mapping():
-    # Mapping from integer labels to strings (from HF dataset repo) and vice versa
-    stoi = {
-        "O": 0,
-        "B-PER": 1,
-        "I-PER": 2,
-        "B-ORG": 3,
-        "I-ORG": 4,
-        "B-LOC": 5,
-        "I-LOC": 6,
-        "B-ANIM": 7,
-        "I-ANIM": 8,
-        "B-BIO": 9,
-        "I-BIO": 10,
-        "B-CEL": 11,
-        "I-CEL": 12,
-        "B-DIS": 13,
-        "I-DIS": 14,
-        "B-EVE": 15,
-        "I-EVE": 16,
-        "B-FOOD": 17,
-        "I-FOOD": 18,
-        "B-INST": 19,
-        "I-INST": 20,
-        "B-MEDIA": 21,
-        "I-MEDIA": 22,
-        "B-MYTH": 23,
-        "I-MYTH": 24,
-        "B-PLANT": 25,
-        "I-PLANT": 26,
-        "B-TIME": 27,
-        "I-TIME": 28,
-        "B-VEHI": 29,
-        "I-VEHI": 30,
-    }
-
-    itos = {value: key for key, value in stoi.items()}
-    return stoi, itos
