@@ -1,7 +1,7 @@
 # rise_test_repo
 
 # Environment setup
-The requirements.txt were created using pipreqs.
+The requirements.txt were created using pipreqs. To use simply run:
 pip install -r requirements.txt
 
 # Usage
