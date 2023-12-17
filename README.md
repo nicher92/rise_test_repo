@@ -4,20 +4,23 @@
 pip install -r requirements.txt
 
 # Usage
-There are 2 required arguments, --system and --search.
+There are 1 required arguments, --system and 2 optional arguments --search and --model_path
 -- system determines whether to use all available labels or a subset.
 -- search determines if a hyperparameter search is do be done prior to training or just use the best hyperparameters I found.
+-- model_path is used if you have already trained a model using the repository and want to re-use it.
 
 Examples:
 python main.py() --system=A --Yes
 This code would run a hyperparameter search prior to training using all NER classes.
 
-python main.py() --system=B --No
-This code will use already found hyperparameters and use only 10 NER classes and the "O" Class.
+python main.py() --system=B --model_path=model_B
+This code will use an already trained model on system B and evaluate it on system B.
+
 
 # Recommendations
 Use a GPU.
 The hyperparameter search takes a while - and I have done it locally so you dont have to :) - but feel free to test it.
+
 
 
 
