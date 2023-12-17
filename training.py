@@ -159,7 +159,7 @@ def hyperparameter_search(model_name, training_dataset, evaluation_dataset, toke
     sorted_by_eval = sorted(results, key=lambda x: x[2])
     best_hyperparameters = sorted_by_eval[0][0]   # Get top config of results sorted by average evaluation loss
     
-    return best_hyperparameters, results
+    return best_hyperparameters
 
 
 def init_model(model_name, tokenizer, training_dataset):
