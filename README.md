@@ -1,10 +1,11 @@
 # rise_test_repo
 
 # Environment setup
+The requirements.txt were created using pipreqs.
 pip install -r requirements.txt
 
 # Usage
-python3 main.py 
+python3 main.py
 
 There is one required argument --system and two optional arguments --search and --model_path
 -- system determines whether to use all available labels or a subset.
