@@ -19,17 +19,18 @@ This code will use already found hyperparameters and use only 10 NER classes and
 Use a GPU.
 The hyperparameter search takes a while - and I have done it locally so you dont have to :) - but feel free to test it.
 
-# Conclusions
-Dataset
-- Uneven label distribution
-- Fairly large dataset
-- Short texts (almost all under 70 tokens)
 
-Model performance
-- TODO
 
-Drawbacks of method
-- TODO
+# Main findings and drawbacks
+Drawbacks of method:
+The classes are heavily imbalanced, and the model would have probably benefitted from some sampling strategy.
+There are other model architectures that perform better on NER tasks, like LUKE which also uses entity embeddings.
+The hyperparameter search was fairly simple and could have been more complex, i.e., using Bayesian or Population-based approaches. It also wasn’t done for very long and the results from it might not be indicative of the best hyperparameters after one full epoch.
+
+Findings:
+Overall, the model performs well, especially on more frequently occurring classes.
+System A has a larger label space than system B, which should make it easier for the model to correctly predict the correct class - but this didnt seem to be the case. All labels not in the allowed classes are turned to “O” but this doesn’t make the O class that much bigger since many of the classes are small. 
+The similarity in performance indicate that the removed classes didn’t impact the model’s predictions on remaining classes much – the model probably didn’t confuse one of the removed classes for one of the remaining classes or vice versa OR the removed classes were so small that it didn’t matter much.
 
 
 
