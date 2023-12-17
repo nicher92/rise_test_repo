@@ -5,9 +5,9 @@ Requirements.txt was created using pipreqs.
 pip install -r requirements.txt
 
 # Usage
-There are 1 required arguments, --system and 2 optional arguments --search and --model_path
--- system determines whether to use all available labels or a subset.
--- search determines if a hyperparameter search is do be done prior to training or just use the best hyperparameters I found.
+There is 1 required argument, --system, and 2 optional arguments --search and --model_path
+-- system takes "A" or "B" and determines whether to use all available labels or a subset.
+-- search determines if a hyperparameter search is to be done prior to training or just use the best hyperparameters I found.
 -- model_path is used if you have already trained a model using the repository and want to re-use it.
 
 Examples:
@@ -21,8 +21,6 @@ This code will use an already trained model on system B and evaluate it on syste
 # Recommendations
 Use a GPU.
 The hyperparameter search takes a while - and I have done it locally so you dont have to :) - but feel free to test it.
-
-
 
 
 # Main findings and drawbacks
