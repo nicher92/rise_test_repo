@@ -133,10 +133,10 @@ def hyperparameter_combinations():
         for bs in batch_sizes:
             for ws in warmup_steps:
                 params = {
-                "lr": lr,            # How much should the model adjust its parameters to fit the task per update
-                "batch_size": bs,    # How large of a batch should the model use to guide its update
-                "warmup_steps": ws,  # Should the LR "climb" up to the max value before decay or start at the top instantly
-                "epochs" : 1         # Set to 1 since I use max batches in hyperparameter search anyways
+                "lr": lr,            
+                "batch_size": bs,   
+                "warmup_steps": ws, 
+                "epochs" : 1     
             }
                 hyperparameter_configs.append(params)
         
