@@ -23,6 +23,10 @@ Use a GPU.
 The hyperparameter search takes a while - and I have done it locally so you dont have to :) - but feel free to test it.
 
 
+# Other
+There is also a jupyter notebook where I used essentially the same code as in main.py, but included some visualizations that helped inform some later decisions.
+
+
 # Main findings and drawbacks
 Drawbacks of method:
 The classes are heavily imbalanced, and the model would have probably benefitted from some sampling strategy.
